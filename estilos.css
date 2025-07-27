@@ -1,18 +1,18 @@
 /* Importación de fuentes de Google Fonts para un diseño moderno */
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Open+Sans:wght@400;600&display=swap');
 
-/* Variables CSS para una paleta de colores coherente - Inspirada en la "Malla de la Princesa Antonia" */
+/* Variables CSS para una paleta de colores coherente - Inspirada en la "Malla de la Princesa Antonia" y rosa palo */
 :root {
-    --color-main-pink: #FFC0CB; /* Rosa Chicle/Claro para el fondo de semestres */
-    --color-light-pink-bg: #FFEBEE; /* Rosa muy claro para el fondo principal */
-    --color-dark-pink-header: #FF8BA7; /* Rosa más oscuro para el header */
+    --color-pink-header: #FF8BA7; /* Rosa más oscuro para el header */
+    --color-main-bg: #FFF7F9; /* Fondo general muy claro, casi blanco con tinte rosa */
+    --color-semestre-bg: #F8D0DA; /* Rosa palo para el fondo de cada semestre */
     --color-course-bg: #FFFFFF; /* Blanco para el fondo de los cursos */
-    --color-course-border: #E0E0E0; /* Gris muy claro para bordes de cursos */
+    --color-course-border: #E8E8E8; /* Gris muy claro para bordes de cursos */
     --color-text-dark: #333333; /* Texto oscuro general */
-    --color-text-light: #666666; /* Texto más claro */
+    --color-text-light: #777777; /* Texto más claro para bloqueados o secundarios */
     --color-approved: #A0D9B1; /* Verde pastel para aprobado */
     --color-blocked: #CCCCCC; /* Gris para bloqueado */
-    --color-highlight-hover: #FFD6E1; /* Rosa claro para hover de cursos */
+    --color-highlight-hover: #FFEDF0; /* Rosa muy suave para hover de cursos */
 }
 
 /* Estilos generales del cuerpo */
@@ -20,7 +20,7 @@ body {
     font-family: 'Open Sans', sans-serif;
     margin: 0;
     padding: 0;
-    background-color: var(--color-light-pink-bg); /* Fondo general rosa muy claro */
+    background-color: var(--color-main-bg); /* Fondo general muy claro */
     color: var(--color-text-dark);
     line-height: 1.6;
     overflow-x: hidden; /* Evita el scroll horizontal no deseado */
@@ -28,7 +28,7 @@ body {
 
 /* Encabezado */
 header {
-    background-color: var(--color-dark-pink-header); /* Rosa más oscuro para el header */
+    background-color: var(--color-pink-header); /* Rosa más oscuro para el header */
     color: var(--color-course-bg); /* Blanco para el texto del header */
     padding: 25px 20px;
     text-align: center;
@@ -50,69 +50,41 @@ header p {
     opacity: 0.9;
 }
 
-/* Contenedor principal de la malla */
+/* Contenedor principal de la malla (ahora contiene directamente los semestres) */
 .malla-curricular-container {
     display: flex;
-    flex-direction: column; /* Apila años verticalmente en móvil */
-    gap: 30px; /* Espacio entre los años */
+    flex-wrap: wrap; /* Permite que los semestres se ajusten en filas */
+    justify-content: center; /* Centra los semestres */
+    gap: 25px; /* Espacio entre los semestres */
     padding: 20px;
     max-width: 1400px; /* Ancho máximo para el contenido */
     margin: 0 auto; /* Centrar el contenedor */
 }
 
-/* Estilo para cada año de la malla */
-.ano {
-    background-color: var(--color-course-bg); /* Blanco para el fondo de los años */
-    border-radius: 12px;
-    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.08);
-    padding: 25px;
-    display: flex;
-    flex-wrap: wrap; /* Permite que los semestres se ajusten */
-    gap: 25px; /* Espacio entre semestres */
-    justify-content: center;
-    position: relative;
-    /* Aquí podrías añadir un 'background-image' de un lirio si lo tienes */
-    /* background-image: url('path/to/tu-lirio.svg'); */
-    /* background-repeat: no-repeat; */
-    /* background-position: top right; */
-    /* background-size: 100px; */
-}
-
-.ano h2 {
-    width: 100%; /* El título del año ocupa todo el ancho */
-    text-align: center;
-    color: var(--color-text-dark);
-    font-family: 'Montserrat', sans-serif;
-    font-size: 2em;
-    margin-top: 0;
-    margin-bottom: 30px;
-    border-bottom: 2px solid var(--color-course-border); /* Separador sutil */
-    padding-bottom: 15px;
-}
-
-/* Estilo para cada semestre */
+/* Estilo para cada semestre (ahora es el contenedor principal de cada columna) */
 .semestre {
-    flex: 1;
-    min-width: 280px;
-    max-width: 400px;
-    background-color: var(--color-main-pink); /* Rosa chicle para semestres */
-    border-radius: 10px;
-    padding: 20px;
-    box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.05); /* Sombra interna para profundidad */
-    display: flex;
+    background-color: var(--color-semestre-bg); /* Fondo rosa palo para semestres */
+    border-radius: 12px; /* Un poco más redondeado */
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.08); /* Sombra para destacarse */
+    padding: 25px; /* Aumenta el padding */
+    flex: 0 1 calc(33.33% - 25px); /* Intenta 3 columnas por defecto, ajusta el ancho */
+    min-width: 280px; /* Ancho mínimo para la responsividad */
+    max-width: 350px; /* Ancho máximo para semestres individuales */
+    box-sizing: border-box; /* Incluye padding en el ancho total */
+    display: flex; /* Para organizar el título y los cursos */
     flex-direction: column;
-    gap: 12px; /* Espacio entre cursos */
+    gap: 15px; /* Espacio entre el título del semestre y los cursos */
 }
 
 .semestre h3 {
     text-align: center;
     color: var(--color-text-dark);
     font-family: 'Montserrat', sans-serif;
-    font-size: 1.4em;
+    font-size: 1.5em; /* Un poco más grande el título del semestre */
     margin-top: 0;
     margin-bottom: 15px;
-    padding-bottom: 8px;
-    border-bottom: 1px solid rgba(0,0,0,0.05);
+    padding-bottom: 10px;
+    border-bottom: 1px solid rgba(0,0,0,0.1); /* Separador más visible */
 }
 
 /* Estilo para cada curso */
@@ -126,12 +98,12 @@ header p {
     font-weight: 600;
     cursor: pointer;
     transition: all 0.3s ease-in-out;
-    user-select: none; /* Evita la selección de texto al hacer clic */
+    user-select: none;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
 }
 
 .curso:hover:not(.aprobado):not(.bloqueado) {
-    background-color: var(--color-highlight-hover); /* Rosa claro para hover */
+    background-color: var(--color-highlight-hover); /* Rosa muy suave para hover */
     transform: translateY(-3px);
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
@@ -142,30 +114,30 @@ header p {
     color: var(--color-course-bg); /* Blanco para el texto del curso aprobado */
     text-decoration: line-through;
     cursor: default;
-    opacity: 0.9; /* Ligeramente menos opaco para destacarlo */
-    border-color: darken(var(--color-approved), 10%); /* Borde más oscuro */
+    opacity: 0.9;
+    border-color: darken(var(--color-approved), 10%);
 }
 
 .curso.bloqueado {
     background-color: var(--color-blocked); /* Gris para bloqueado */
-    color: var(--color-text-light); /* Texto más claro para el curso bloqueado */
+    color: var(--color-text-light);
     cursor: not-allowed;
     opacity: 0.7;
-    border-style: dashed; /* Borde punteado para indicar bloqueo */
+    border-style: dashed;
 }
 
-/* Modal de mensajes */
+/* Modal de mensajes (sin cambios significativos en estilo, solo variables) */
 .modal {
-    display: none; /* Oculto por defecto */
-    position: fixed; /* Posición fija */
-    z-index: 1000; /* Alto z-index para estar por encima de todo */
+    display: none;
+    position: fixed;
+    z-index: 1000;
     left: 0;
     top: 0;
     width: 100%;
     height: 100%;
-    overflow: auto; /* Habilitar scroll si el contenido es grande */
-    background-color: rgba(0, 0, 0, 0.5); /* Fondo semitransparente oscuro */
-    display: flex; /* Para centrar el contenido */
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
     align-items: center;
     justify-content: center;
 }
@@ -180,7 +152,7 @@ header p {
     max-width: 500px;
     position: relative;
     text-align: center;
-    animation: fadeInScale 0.3s ease-out; /* Animación de entrada */
+    animation: fadeInScale 0.3s ease-out;
 }
 
 .modal-content h2 {
@@ -213,19 +185,11 @@ header p {
     color: var(--color-text-dark);
 }
 
-/* Animación de entrada del modal */
 @keyframes fadeInScale {
-    from {
-        opacity: 0;
-        transform: scale(0.9);
-    }
-    to {
-        opacity: 1;
-        transform: scale(1);
-    }
+    from { opacity: 0; transform: scale(0.9); }
+    to { opacity: 1; transform: scale(1); }
 }
 
-/* Ocultar información de prerrequisitos que no debe mostrarse */
 .hidden-requisitos-info {
     display: none;
 }
@@ -233,35 +197,20 @@ header p {
 /* Media Queries para responsividad */
 @media (min-width: 768px) {
     .malla-curricular-container {
-        flex-direction: row; /* En pantallas más grandes, los años se organizan horizontalmente */
-        flex-wrap: wrap; /* Permite que los años se envuelvan */
-        justify-content: center;
-    }
-
-    .ano {
-        flex: 1; /* Permite que los años ocupen espacio */
-        max-width: calc(50% - 30px); /* Dos años por fila con espacio */
-    }
-
-    /* Ajuste para los años con muchos semestres */
-    .ano:nth-child(1), .ano:nth-child(2), .ano:nth-child(3), .ano:nth-child(4) { /* Los primeros 4 años tienen 2 semestres */
-        max-width: calc(50% - 30px);
+        justify-content: flex-start; /* Alinea los semestres al inicio para múltiples columnas */
+        gap: 20px; /* Reduce un poco el espacio para más columnas */
     }
 
     .semestre {
-        min-width: 250px;
+        flex: 0 1 calc(33.33% - 20px); /* 3 semestres por fila en pantallas medianas */
+        max-width: calc(33.33% - 20px); /* Asegura que no crezca más */
     }
 }
 
 @media (min-width: 1024px) {
-    .malla-curricular-container {
-        flex-wrap: nowrap; /* Evita que los años se envuelvan, manteniéndolos en una línea si hay espacio */
-    }
-
-    .ano {
-        max-width: none; /* Deshacer el max-width para 2 años por fila */
-        flex-basis: auto; /* Vuelve al tamaño automático */
-        /* Si quieres 3 años por fila, podrías usar flex: 1 1 calc(33.33% - 20px); */
+    .semestre {
+        flex: 0 1 calc(20% - 20px); /* Intenta 5 semestres por fila en pantallas grandes */
+        max-width: calc(20% - 20px);
     }
 }
 
@@ -273,8 +222,9 @@ header p {
         font-size: 1em;
     }
     .semestre {
-        min-width: unset; /* Reinicia el min-width para móviles */
-        width: 100%; /* Ocupa todo el ancho disponible */
+        min-width: unset;
+        width: 95%; /* Ocupa casi todo el ancho disponible */
+        flex: 0 1 100%; /* Un semestre por fila en móviles */
     }
     .modal-content {
         padding: 20px;
