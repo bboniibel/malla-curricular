@@ -1,13 +1,11 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // Selecciona todos los elementos con la clase 'curso'
     const cursos = document.querySelectorAll('.curso');
-    // Selecciona los elementos del modal
     const modal = document.getElementById('modal');
     const modalTitle = document.getElementById('modal-title');
     const modalMessage = document.getElementById('modal-message');
     const closeButton = document.querySelector('.close-button');
 
-    // Objeto para almacenar los nombres de los cursos por su ID
+    // Objeto para almacenar los nombres de los cursos por su ID (para mensajes)
     const courseNames = {};
     document.querySelectorAll('.hidden-requisitos-info span').forEach(span => {
         courseNames[span.dataset.id] = span.dataset.name;
@@ -31,13 +29,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const updateCourseUI = () => {
         cursos.forEach(curso => {
             const courseId = curso.dataset.id;
-            // Elimina las clases de estado previas
-            curso.classList.remove('aprobado', 'bloqueado');
+            curso.classList.remove('aprobado', 'bloqueado'); // Limpiar clases antes de aplicar
 
             if (approvedCoursesState[courseId]) {
                 curso.classList.add('aprobado');
             } else {
-                // Verificar si el curso está bloqueado
                 const requisitos = curso.dataset.requisitos ? curso.dataset.requisitos.split(',') : [];
                 const isBlocked = requisitos.some(reqId => !approvedCoursesState[reqId]);
                 if (isBlocked) {
@@ -50,19 +46,19 @@ document.addEventListener('DOMContentLoaded', () => {
     // Función para mostrar el modal con un mensaje
     const showModal = (title, message) => {
         modalTitle.textContent = title;
-        modalMessage.innerHTML = message; // Usar innerHTML para permitir etiquetas HTML (e.g., <ul>)
-        modal.style.display = 'flex'; // Usar flex para centrar
+        modalMessage.innerHTML = message;
+        modal.style.display = 'flex'; // Mostrar el modal
     };
 
     // Función para cerrar el modal
     const closeModal = () => {
-        modal.style.display = 'none';
+        modal.style.display = 'none'; // Ocultar el modal
     };
 
-    // Event listener para cerrar el modal al hacer clic en el botón o fuera del contenido
+    // Event listeners para el modal
     closeButton.addEventListener('click', closeModal);
     modal.addEventListener('click', (e) => {
-        if (e.target === modal) {
+        if (e.target === modal) { // Si se hace clic fuera del contenido del modal
             closeModal();
         }
     });
@@ -79,8 +75,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 delete approvedCoursesState[courseId];
                 saveApprovedCourses(approvedCoursesState);
                 updateCourseUI();
-                // Opcional: Mostrar un mensaje de desaprobación o simplemente actualizar
-                // showModal('Curso Desaprobado', `Has desaprobado "${courseName}".`);
             } else {
                 // Verificar prerrequisitos
                 const missingRequisitos = requisitos.filter(reqId => !approvedCoursesState[reqId]);
@@ -90,11 +84,9 @@ document.addEventListener('DOMContentLoaded', () => {
                     approvedCoursesState[courseId] = true;
                     saveApprovedCourses(approvedCoursesState);
                     updateCourseUI();
-                    // Opcional: Mostrar un mensaje de aprobación
-                    // showModal('Curso Aprobado', `¡Felicidades! Has aprobado "${courseName}".`);
                 } else {
                     // Si faltan requisitos, mostrar mensaje de bloqueo
-                    const missingNames = missingRequisitos.map(id => courseNames[id] || id); // Obtener nombres legibles
+                    const missingNames = missingRequisitos.map(id => courseNames[id] || id);
                     let message = `No puedes aprobar "${courseName}" porque te faltan los siguientes ramos:<br><br><ul>`;
                     missingNames.forEach(name => {
                         message += `<li>- ${name}</li>`;
@@ -106,6 +98,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Inicializar la UI al cargar la página
+    // Inicializar la UI al cargar la página (esto no muestra el modal al inicio)
     updateCourseUI();
 });
