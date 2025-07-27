@@ -1,17 +1,18 @@
 /* Importación de fuentes de Google Fonts para un diseño moderno */
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Open+Sans:wght@400;600&display=swap');
 
-/* Variables CSS para una paleta de colores coherente */
+/* Variables CSS para una paleta de colores coherente - Inspirada en la "Malla de la Princesa Antonia" */
 :root {
-    --color-pink-pastel: #F8C8DC; /* Rosa pastel */
-    --color-light-pink: #FFDDEE; /* Rosa más claro para fondos */
-    --color-green-pastel: #B0E0E6; /* Verde/azul pastel para elementos secundarios */
-    --color-light-green: #E0F5F7; /* Verde/azul pastel más claro */
-    --color-gray-pastel: #D3D3D3; /* Gris pastel para texto secundario */
-    --color-white: #FFFFFF; /* Blanco puro */
-    --color-dark-text: #4A4A4A; /* Texto oscuro */
-    --color-accent-green: #7FD8BE; /* Verde de acento para aprobado */
-    --color-accent-red: #E08080; /* Rojo de acento para bloqueado (opcional, si se quiere resaltar más) */
+    --color-main-pink: #FFC0CB; /* Rosa Chicle/Claro para el fondo de semestres */
+    --color-light-pink-bg: #FFEBEE; /* Rosa muy claro para el fondo principal */
+    --color-dark-pink-header: #FF8BA7; /* Rosa más oscuro para el header */
+    --color-course-bg: #FFFFFF; /* Blanco para el fondo de los cursos */
+    --color-course-border: #E0E0E0; /* Gris muy claro para bordes de cursos */
+    --color-text-dark: #333333; /* Texto oscuro general */
+    --color-text-light: #666666; /* Texto más claro */
+    --color-approved: #A0D9B1; /* Verde pastel para aprobado */
+    --color-blocked: #CCCCCC; /* Gris para bloqueado */
+    --color-highlight-hover: #FFD6E1; /* Rosa claro para hover de cursos */
 }
 
 /* Estilos generales del cuerpo */
@@ -19,16 +20,16 @@ body {
     font-family: 'Open Sans', sans-serif;
     margin: 0;
     padding: 0;
-    background-color: var(--color-light-pink); /* Fondo general rosa claro */
-    color: var(--color-dark-text);
+    background-color: var(--color-light-pink-bg); /* Fondo general rosa muy claro */
+    color: var(--color-text-dark);
     line-height: 1.6;
     overflow-x: hidden; /* Evita el scroll horizontal no deseado */
 }
 
 /* Encabezado */
 header {
-    background-color: var(--color-pink-pastel);
-    color: var(--color-white);
+    background-color: var(--color-dark-pink-header); /* Rosa más oscuro para el header */
+    color: var(--color-course-bg); /* Blanco para el texto del header */
     padding: 25px 20px;
     text-align: center;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -39,13 +40,13 @@ header {
 header h1 {
     margin: 0;
     font-size: 2.5em;
-    color: var(--color-white);
+    color: var(--color-course-bg);
     text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
 }
 
 header p {
     font-size: 1.1em;
-    color: var(--color-white);
+    color: var(--color-course-bg);
     opacity: 0.9;
 }
 
@@ -61,7 +62,7 @@ header p {
 
 /* Estilo para cada año de la malla */
 .ano {
-    background-color: var(--color-white);
+    background-color: var(--color-course-bg); /* Blanco para el fondo de los años */
     border-radius: 12px;
     box-shadow: 0 6px 15px rgba(0, 0, 0, 0.08);
     padding: 25px;
@@ -69,27 +70,32 @@ header p {
     flex-wrap: wrap; /* Permite que los semestres se ajusten */
     gap: 25px; /* Espacio entre semestres */
     justify-content: center;
-    position: relative; /* Para posibles decoraciones */
+    position: relative;
+    /* Aquí podrías añadir un 'background-image' de un lirio si lo tienes */
+    /* background-image: url('path/to/tu-lirio.svg'); */
+    /* background-repeat: no-repeat; */
+    /* background-position: top right; */
+    /* background-size: 100px; */
 }
 
 .ano h2 {
     width: 100%; /* El título del año ocupa todo el ancho */
     text-align: center;
-    color: var(--color-dark-text);
+    color: var(--color-text-dark);
     font-family: 'Montserrat', sans-serif;
     font-size: 2em;
     margin-top: 0;
     margin-bottom: 30px;
-    border-bottom: 2px solid var(--color-light-pink); /* Separador sutil */
+    border-bottom: 2px solid var(--color-course-border); /* Separador sutil */
     padding-bottom: 15px;
 }
 
 /* Estilo para cada semestre */
 .semestre {
-    flex: 1; /* Permite que los semestres se distribuyan */
-    min-width: 280px; /* Ancho mínimo para la responsividad */
-    max-width: 400px; /* Ancho máximo para semestres grandes */
-    background-color: var(--color-light-green); /* Fondo verde pastel para semestres */
+    flex: 1;
+    min-width: 280px;
+    max-width: 400px;
+    background-color: var(--color-main-pink); /* Rosa chicle para semestres */
     border-radius: 10px;
     padding: 20px;
     box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.05); /* Sombra interna para profundidad */
@@ -100,7 +106,7 @@ header p {
 
 .semestre h3 {
     text-align: center;
-    color: var(--color-dark-text);
+    color: var(--color-text-dark);
     font-family: 'Montserrat', sans-serif;
     font-size: 1.4em;
     margin-top: 0;
@@ -111,8 +117,8 @@ header p {
 
 /* Estilo para cada curso */
 .curso {
-    background-color: var(--color-white);
-    border: 1px solid var(--color-gray-pastel);
+    background-color: var(--color-course-bg); /* Blanco para el fondo de los cursos */
+    border: 1px solid var(--color-course-border); /* Gris muy claro para bordes */
     border-radius: 8px;
     padding: 15px 20px;
     text-align: center;
@@ -125,26 +131,26 @@ header p {
 }
 
 .curso:hover:not(.aprobado):not(.bloqueado) {
-    background-color: var(--color-light-pink);
+    background-color: var(--color-highlight-hover); /* Rosa claro para hover */
     transform: translateY(-3px);
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
 /* Estados de los cursos */
 .curso.aprobado {
-    background-color: var(--color-accent-green); /* Verde pastel para aprobado */
-    color: var(--color-white);
+    background-color: var(--color-approved); /* Verde pastel para aprobado */
+    color: var(--color-course-bg); /* Blanco para el texto del curso aprobado */
     text-decoration: line-through;
     cursor: default;
-    opacity: 0.8;
-    border-color: darken(var(--color-accent-green), 10%); /* Borde más oscuro */
+    opacity: 0.9; /* Ligeramente menos opaco para destacarlo */
+    border-color: darken(var(--color-approved), 10%); /* Borde más oscuro */
 }
 
 .curso.bloqueado {
-    background-color: var(--color-gray-pastel); /* Gris pastel para bloqueado */
-    color: var(--color-dark-text);
+    background-color: var(--color-blocked); /* Gris para bloqueado */
+    color: var(--color-text-light); /* Texto más claro para el curso bloqueado */
     cursor: not-allowed;
-    opacity: 0.6;
+    opacity: 0.7;
     border-style: dashed; /* Borde punteado para indicar bloqueo */
 }
 
@@ -165,7 +171,7 @@ header p {
 }
 
 .modal-content {
-    background-color: var(--color-white);
+    background-color: var(--color-course-bg);
     margin: auto;
     padding: 30px;
     border-radius: 10px;
@@ -178,7 +184,7 @@ header p {
 }
 
 .modal-content h2 {
-    color: var(--color-dark-text);
+    color: var(--color-text-dark);
     font-family: 'Montserrat', sans-serif;
     margin-top: 0;
     margin-bottom: 15px;
@@ -188,11 +194,11 @@ header p {
 .modal-content p {
     font-size: 1.1em;
     line-height: 1.8;
-    color: var(--color-dark-text);
+    color: var(--color-text-dark);
 }
 
 .close-button {
-    color: var(--color-gray-pastel);
+    color: var(--color-text-light);
     position: absolute;
     top: 15px;
     right: 25px;
@@ -204,7 +210,7 @@ header p {
 
 .close-button:hover,
 .close-button:focus {
-    color: var(--color-dark-text);
+    color: var(--color-text-dark);
 }
 
 /* Animación de entrada del modal */
