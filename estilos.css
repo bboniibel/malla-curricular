@@ -1,1 +1,282 @@
+/* Importación de fuentes de Google Fonts para un diseño moderno */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Open+Sans:wght@400;600&display=swap');
 
+/* Variables CSS para una paleta de colores coherente */
+:root {
+    --color-pink-pastel: #F8C8DC; /* Rosa pastel */
+    --color-light-pink: #FFDDEE; /* Rosa más claro para fondos */
+    --color-green-pastel: #B0E0E6; /* Verde/azul pastel para elementos secundarios */
+    --color-light-green: #E0F5F7; /* Verde/azul pastel más claro */
+    --color-gray-pastel: #D3D3D3; /* Gris pastel para texto secundario */
+    --color-white: #FFFFFF; /* Blanco puro */
+    --color-dark-text: #4A4A4A; /* Texto oscuro */
+    --color-accent-green: #7FD8BE; /* Verde de acento para aprobado */
+    --color-accent-red: #E08080; /* Rojo de acento para bloqueado (opcional, si se quiere resaltar más) */
+}
+
+/* Estilos generales del cuerpo */
+body {
+    font-family: 'Open Sans', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: var(--color-light-pink); /* Fondo general rosa claro */
+    color: var(--color-dark-text);
+    line-height: 1.6;
+    overflow-x: hidden; /* Evita el scroll horizontal no deseado */
+}
+
+/* Encabezado */
+header {
+    background-color: var(--color-pink-pastel);
+    color: var(--color-white);
+    padding: 25px 20px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    font-family: 'Montserrat', sans-serif;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 2.5em;
+    color: var(--color-white);
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+}
+
+header p {
+    font-size: 1.1em;
+    color: var(--color-white);
+    opacity: 0.9;
+}
+
+/* Contenedor principal de la malla */
+.malla-curricular-container {
+    display: flex;
+    flex-direction: column; /* Apila años verticalmente en móvil */
+    gap: 30px; /* Espacio entre los años */
+    padding: 20px;
+    max-width: 1400px; /* Ancho máximo para el contenido */
+    margin: 0 auto; /* Centrar el contenedor */
+}
+
+/* Estilo para cada año de la malla */
+.ano {
+    background-color: var(--color-white);
+    border-radius: 12px;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.08);
+    padding: 25px;
+    display: flex;
+    flex-wrap: wrap; /* Permite que los semestres se ajusten */
+    gap: 25px; /* Espacio entre semestres */
+    justify-content: center;
+    position: relative; /* Para posibles decoraciones */
+}
+
+.ano h2 {
+    width: 100%; /* El título del año ocupa todo el ancho */
+    text-align: center;
+    color: var(--color-dark-text);
+    font-family: 'Montserrat', sans-serif;
+    font-size: 2em;
+    margin-top: 0;
+    margin-bottom: 30px;
+    border-bottom: 2px solid var(--color-light-pink); /* Separador sutil */
+    padding-bottom: 15px;
+}
+
+/* Estilo para cada semestre */
+.semestre {
+    flex: 1; /* Permite que los semestres se distribuyan */
+    min-width: 280px; /* Ancho mínimo para la responsividad */
+    max-width: 400px; /* Ancho máximo para semestres grandes */
+    background-color: var(--color-light-green); /* Fondo verde pastel para semestres */
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.05); /* Sombra interna para profundidad */
+    display: flex;
+    flex-direction: column;
+    gap: 12px; /* Espacio entre cursos */
+}
+
+.semestre h3 {
+    text-align: center;
+    color: var(--color-dark-text);
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.4em;
+    margin-top: 0;
+    margin-bottom: 15px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid rgba(0,0,0,0.05);
+}
+
+/* Estilo para cada curso */
+.curso {
+    background-color: var(--color-white);
+    border: 1px solid var(--color-gray-pastel);
+    border-radius: 8px;
+    padding: 15px 20px;
+    text-align: center;
+    font-size: 0.95em;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    user-select: none; /* Evita la selección de texto al hacer clic */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+.curso:hover:not(.aprobado):not(.bloqueado) {
+    background-color: var(--color-light-pink);
+    transform: translateY(-3px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Estados de los cursos */
+.curso.aprobado {
+    background-color: var(--color-accent-green); /* Verde pastel para aprobado */
+    color: var(--color-white);
+    text-decoration: line-through;
+    cursor: default;
+    opacity: 0.8;
+    border-color: darken(var(--color-accent-green), 10%); /* Borde más oscuro */
+}
+
+.curso.bloqueado {
+    background-color: var(--color-gray-pastel); /* Gris pastel para bloqueado */
+    color: var(--color-dark-text);
+    cursor: not-allowed;
+    opacity: 0.6;
+    border-style: dashed; /* Borde punteado para indicar bloqueo */
+}
+
+/* Modal de mensajes */
+.modal {
+    display: none; /* Oculto por defecto */
+    position: fixed; /* Posición fija */
+    z-index: 1000; /* Alto z-index para estar por encima de todo */
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto; /* Habilitar scroll si el contenido es grande */
+    background-color: rgba(0, 0, 0, 0.5); /* Fondo semitransparente oscuro */
+    display: flex; /* Para centrar el contenido */
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-content {
+    background-color: var(--color-white);
+    margin: auto;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+    width: 90%;
+    max-width: 500px;
+    position: relative;
+    text-align: center;
+    animation: fadeInScale 0.3s ease-out; /* Animación de entrada */
+}
+
+.modal-content h2 {
+    color: var(--color-dark-text);
+    font-family: 'Montserrat', sans-serif;
+    margin-top: 0;
+    margin-bottom: 15px;
+    font-size: 1.8em;
+}
+
+.modal-content p {
+    font-size: 1.1em;
+    line-height: 1.8;
+    color: var(--color-dark-text);
+}
+
+.close-button {
+    color: var(--color-gray-pastel);
+    position: absolute;
+    top: 15px;
+    right: 25px;
+    font-size: 30px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: color 0.2s ease;
+}
+
+.close-button:hover,
+.close-button:focus {
+    color: var(--color-dark-text);
+}
+
+/* Animación de entrada del modal */
+@keyframes fadeInScale {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* Ocultar información de prerrequisitos que no debe mostrarse */
+.hidden-requisitos-info {
+    display: none;
+}
+
+/* Media Queries para responsividad */
+@media (min-width: 768px) {
+    .malla-curricular-container {
+        flex-direction: row; /* En pantallas más grandes, los años se organizan horizontalmente */
+        flex-wrap: wrap; /* Permite que los años se envuelvan */
+        justify-content: center;
+    }
+
+    .ano {
+        flex: 1; /* Permite que los años ocupen espacio */
+        max-width: calc(50% - 30px); /* Dos años por fila con espacio */
+    }
+
+    /* Ajuste para los años con muchos semestres */
+    .ano:nth-child(1), .ano:nth-child(2), .ano:nth-child(3), .ano:nth-child(4) { /* Los primeros 4 años tienen 2 semestres */
+        max-width: calc(50% - 30px);
+    }
+
+    .semestre {
+        min-width: 250px;
+    }
+}
+
+@media (min-width: 1024px) {
+    .malla-curricular-container {
+        flex-wrap: nowrap; /* Evita que los años se envuelvan, manteniéndolos en una línea si hay espacio */
+    }
+
+    .ano {
+        max-width: none; /* Deshacer el max-width para 2 años por fila */
+        flex-basis: auto; /* Vuelve al tamaño automático */
+        /* Si quieres 3 años por fila, podrías usar flex: 1 1 calc(33.33% - 20px); */
+    }
+}
+
+@media (max-width: 600px) {
+    header h1 {
+        font-size: 2em;
+    }
+    header p {
+        font-size: 1em;
+    }
+    .semestre {
+        min-width: unset; /* Reinicia el min-width para móviles */
+        width: 100%; /* Ocupa todo el ancho disponible */
+    }
+    .modal-content {
+        padding: 20px;
+    }
+    .modal-content h2 {
+        font-size: 1.5em;
+    }
+    .modal-content p {
+        font-size: 1em;
+    }
+}
